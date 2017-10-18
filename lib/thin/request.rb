@@ -39,6 +39,7 @@ module Thin
     RACK_MULTIPROCESS = 'rack.multiprocess'.freeze
     RACK_RUN_ONCE     = 'rack.run_once'.freeze
     ASYNC_CALLBACK    = 'async.callback'.freeze
+    ASYNC_CONNECTION  = 'async.connection'.freeze
     ASYNC_CLOSE       = 'async.close'.freeze
 
     # CGI-like request environment variables
@@ -134,6 +135,10 @@ module Thin
     def async_callback=(callback)
       @env[ASYNC_CALLBACK] = callback
       @env[ASYNC_CLOSE] = EventMachine::DefaultDeferrable.new
+    end
+
+    def async_connection=(connection)
+      @env[ASYNC_CONNECTION] = connection
     end
 
     def async_close

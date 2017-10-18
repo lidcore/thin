@@ -68,6 +68,7 @@ module Thin
       # It should be noted that connection objects will linger until this
       # callback is no longer referenced, so be tidy!
       @request.async_callback = method(:post_process)
+      @request.async_connection = self
 
       if @backend.ssl?
         @request.env["rack.url_scheme"] = "https"
